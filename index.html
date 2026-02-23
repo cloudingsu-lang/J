@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Favorite Person</title>
     <link rel="stylesheet" href="design.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
@@ -29,27 +30,36 @@
 
     <script>
         const reasons = [
-    "The way your eyes sparkle when you're talking about something you love.",
-    "How you sometime make my bad days better.",
-    "How you like to study, which make me want to study too.",
-    "The way you laugh at my jokes.",
-    "Because you're the first person who tell me not to get drunk.",
-    "How you like to read books.",
-    "The way you call me Nico",
-    "The way you force me to eat spicy noodles.",
-    "\"Ama\" \"Bl ko ama ll!\"",
-    "The way you act mad at me",
-    "The way you always sending kpop lyrics to me",
-    "How you like strawberries",
-    "How you always try to tell me coffee suck",
-    "The way you always make me smile when I saw you in school mornings",
-    "They way knowing we love, though we don't need to say it to each other"
-];
+            "The way your eyes sparkle when you're talking about something you love.",
+            "How you sometime make my bad days better.",
+            "How you like to study, which make me want to study too.",
+            "The way you laugh at my jokes.",
+            "Because you're the first person who tell me not to get drunk.",
+            "How you like to read books.",
+            "The way you call me Nico",
+            "The way you force me to eat spicy noodles.",
+            "\"Ama\" \"Bl ko ama ll!\"",
+            "The way you act mad at me",
+            "The way you always sending kpop lyrics to me",
+            "How you like strawberries",
+            "How you always try to tell me coffee suck",
+            "The way you always make me smile when I saw you in school mornings",
+            "They way knowing we love, though we don't need to say it to each other"
+        ];
+
         const btn = document.getElementById('generate-btn');
         const display = document.getElementById('reason-display');
 
         btn.addEventListener('click', () => {
-            // Adding a quick "pop" animation to the text
+            // 1. Throw Confetti!
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff758f', '#ff4d6d', '#fff']
+            });
+
+            // 2. Animate text
             display.style.transform = "scale(0.9)";
             display.style.opacity = "0";
             
@@ -62,6 +72,6 @@
         });
     </script>
 </body>
-
 </html>
+
 
