@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person</title>
+    <title>For Juliette</title>
     <link rel="stylesheet" href="design.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
@@ -29,7 +29,8 @@
     </div>
 
     <script>
-        const reasons = [
+        // Your full list of reasons
+        const originalReasons = [
             "The way your eyes sparkle when you're talking about something you love.",
             "How you sometime make my bad days better.",
             "How you like to study, which make me want to study too.",
@@ -47,25 +48,38 @@
             "They way knowing we love, though we don't need to say it to each other"
         ];
 
+        // Logic to prevent repeating until all are shown
+        let availableReasons = [...originalReasons];
+
         const btn = document.getElementById('generate-btn');
         const display = document.getElementById('reason-display');
 
         btn.addEventListener('click', () => {
-            // 1. Throw Confetti!
+            // Check if we need to refill the pile
+            if (availableReasons.length === 0) {
+                availableReasons = [...originalReasons];
+            }
+
+            // Pick a random index from what's left
+            const randomIndex = Math.floor(Math.random() * availableReasons.length);
+            
+            // Remove it from the array so it can't be picked again this round
+            const selectedReason = availableReasons.splice(randomIndex, 1)[0];
+
+            // 1. Trigger Confetti
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#ff758f', '#ff4d6d', '#fff']
+                colors: ['#ff758f', '#ff4d6d', '#ffffff']
             });
 
-            // 2. Animate text
+            // 2. Animate text change
             display.style.transform = "scale(0.9)";
             display.style.opacity = "0";
             
             setTimeout(() => {
-                const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
-                display.innerText = randomReason;
+                display.innerText = selectedReason;
                 display.style.transform = "scale(1)";
                 display.style.opacity = "1";
             }, 200);
