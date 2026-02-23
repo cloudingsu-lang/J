@@ -29,8 +29,8 @@
     </div>
 
     <script>
-        // Your full list of reasons
-        const originalReasons = [
+        // Your list in the exact order you want them shown
+        const reasons = [
             "The way your eyes sparkle when you're talking about something you love.",
             "How you sometime make my bad days better.",
             "How you like to study, which make me want to study too.",
@@ -48,25 +48,19 @@
             "They way knowing we love, though we don't need to say it to each other"
         ];
 
-        // Logic to prevent repeating until all are shown
-        let availableReasons = [...originalReasons];
+        let currentIndex = 0; // Starts at the first reason
 
         const btn = document.getElementById('generate-btn');
         const display = document.getElementById('reason-display');
 
         btn.addEventListener('click', () => {
-            // Check if we need to refill the pile
-            if (availableReasons.length === 0) {
-                availableReasons = [...originalReasons];
-            }
+            // 1. Get the reason at the current position
+            const selectedReason = reasons[currentIndex];
 
-            // Pick a random index from what's left
-            const randomIndex = Math.floor(Math.random() * availableReasons.length);
-            
-            // Remove it from the array so it can't be picked again this round
-            const selectedReason = availableReasons.splice(randomIndex, 1)[0];
+            // 2. Move to the next number for next time (loops back to 0 at the end)
+            currentIndex = (currentIndex + 1) % reasons.length;
 
-            // 1. Trigger Confetti
+            // 3. Trigger Confetti
             confetti({
                 particleCount: 100,
                 spread: 70,
@@ -74,7 +68,7 @@
                 colors: ['#ff758f', '#ff4d6d', '#ffffff']
             });
 
-            // 2. Animate text change
+            // 4. Animate text change
             display.style.transform = "scale(0.9)";
             display.style.opacity = "0";
             
@@ -87,5 +81,6 @@
     </script>
 </body>
 </html>
+
 
 
