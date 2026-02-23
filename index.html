@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="icon-wrapper">
+                <span class="floating-heart">❤️</span>
+            </div>
+            
+            <h1>Hi [Her Name]!</h1>
+            <div class="divider"></div>
+            
+            <p id="reason-display">Click the button below to see one of the many reasons why you're so special to me.</p>
+            
+            <button id="generate-btn">Tap for a Reason</button>
+            
+            <div class="footer-note">
+                Made for you with ❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const reasons = [
+            "The way your eyes sparkle when you're talking about something you love.",
+            "How you always know exactly how to make a bad day better.",
+            "Your kindness, which makes me want to be a better person every day.",
+            "The way you laugh at my dorkiest jokes.",
+            "Because you're the first person I want to talk to when I wake up.",
+            "How you support my dreams, even the crazy ones.",
+            "The way you look in the morning before you've even tried.",
+            "Because being with you feels like being home."
+        ];
+
+        const btn = document.getElementById('generate-btn');
+        const display = document.getElementById('reason-display');
+
+        btn.addEventListener('click', () => {
+            // Adding a quick "pop" animation to the text
+            display.style.transform = "scale(0.9)";
+            display.style.opacity = "0";
+            
+            setTimeout(() => {
+                const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+                display.innerText = randomReason;
+                display.style.transform = "scale(1)";
+                display.style.opacity = "1";
+            }, 200);
+        });
+    </script>
+</body>
+</html>
