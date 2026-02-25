@@ -6,10 +6,70 @@
     <title>For Juliette</title>
     <link rel="stylesheet" href="design.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Intro Scene Styles */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fdfcfb;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .loader-heart {
+            font-size: 80px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .intro-text {
+            margin-top: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            color: #ff758f;
+            letter-spacing: 3px;
+            font-weight: 300;
+            text-transform: uppercase;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Hide the main container initially */
+        .container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
+        }
+
+        .show-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="intro-overlay">
+        <div class="loader-heart">❤️</div>
+        <div class="intro-text">Thinking of you...</div>
+    </div>
+
+    <div class="container" id="main-container">
         <div class="card">
             <div class="icon-wrapper">
                 <span class="floating-heart">❤️</span>
@@ -29,7 +89,23 @@
     </div>
 
     <script>
-        // Your list in the exact order you want them shown
+        // --- Intro Scene Logic ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const overlay = document.getElementById('intro-overlay');
+                const content = document.getElementById('main-container');
+                
+                overlay.style.opacity = '0';
+                content.classList.add('show-content');
+                
+                // Remove overlay from DOM after fade out
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 1000);
+            }, 2500); // 2.5 seconds delay
+        });
+
+        // --- Your Reasons Logic ---
         const reasons = [
             "The way your eyes sparkle when you're talking about something you love.",
             "How you sometime make my bad days better.",
@@ -45,22 +121,18 @@
             "How you like strawberries",
             "How you always try to tell me coffee suck",
             "The way you always make me smile when I saw you in school mornings",
-            "The way knowing we love, though we don't need to say it to each other"
+            "They way knowing we love, though we don't need to say it to each other"
         ];
 
-        let currentIndex = 0; // Starts at the first reason
+        let currentIndex = 0;
 
         const btn = document.getElementById('generate-btn');
         const display = document.getElementById('reason-display');
 
         btn.addEventListener('click', () => {
-            // 1. Get the reason at the current position
             const selectedReason = reasons[currentIndex];
-
-            // 2. Move to the next number for next time (loops back to 0 at the end)
             currentIndex = (currentIndex + 1) % reasons.length;
 
-            // 3. Trigger Confetti
             confetti({
                 particleCount: 100,
                 spread: 70,
@@ -68,7 +140,6 @@
                 colors: ['#ff758f', '#ff4d6d', '#ffffff']
             });
 
-            // 4. Animate text change
             display.style.transform = "scale(0.9)";
             display.style.opacity = "0";
             
@@ -81,6 +152,7 @@
     </script>
 </body>
 </html>
+
 
 
 
