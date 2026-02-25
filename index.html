@@ -22,14 +22,16 @@
 
         .intro-text {
             font-family: 'Segoe UI', sans-serif;
-            color: #ff758f;
-            font-size: 1.5rem;
-            font-weight: 300;
+            color: #ff4d6d; /* Made color slightly deeper for visibility */
+            font-size: 2.5rem; /* Increased from 1.5rem to 2.5rem */
+            font-weight: 700; /* Added bold weight */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Added subtle shadow */
             text-align: center;
             opacity: 0;
-            position: absolute; /* Keeps text centered in same spot */
+            position: absolute;
             transition: opacity 0.8s ease-in-out;
             padding: 20px;
+            width: 90%; /* Ensures long text doesn't hit the screen edges */
         }
 
         /* Hide main container initially */
@@ -150,6 +152,7 @@
     </script>
 </body>
 </html>
+
 
 
 
