@@ -10,46 +10,29 @@
         /* Intro Scene Styles */
         #intro-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: #fdfcfb;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             transition: opacity 1s ease-out;
         }
 
-        .loader-heart {
-            font-size: 80px;
-            animation: pulse 1.5s infinite;
-        }
-
         .intro-text {
-            margin-top: 20px;
             font-family: 'Segoe UI', sans-serif;
             color: #ff758f;
-            letter-spacing: 3px;
+            font-size: 1.5rem;
             font-weight: 300;
-            text-transform: uppercase;
-            animation: fadeInOut 2s infinite;
+            text-align: center;
+            opacity: 0;
+            position: absolute; /* Keeps text centered in same spot */
+            transition: opacity 0.8s ease-in-out;
+            padding: 20px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Hide the main container initially */
+        /* Hide main container initially */
         .container {
             opacity: 0;
             transform: translateY(20px);
@@ -65,8 +48,9 @@
 <body>
 
     <div id="intro-overlay">
-        <div class="loader-heart">❤️</div>
-        <div class="intro-text">Thinking of you...</div>
+        <div class="intro-text" id="text1">Hey Juliette...</div>
+        <div class="intro-text" id="text2">I wanted to tell you something.</div>
+        <div class="intro-text" id="text3">Actually, it's 15 things. ❤️</div>
     </div>
 
     <div class="container" id="main-container">
@@ -89,20 +73,35 @@
     </div>
 
     <script>
-        // --- Intro Scene Logic ---
+        // --- 3-Scene Intro Logic ---
         window.addEventListener('load', () => {
+            const t1 = document.getElementById('text1');
+            const t2 = document.getElementById('text2');
+            const t3 = document.getElementById('text3');
+            const overlay = document.getElementById('intro-overlay');
+            const content = document.getElementById('main-container');
+
+            // Scene 1: Show 1st text
+            setTimeout(() => { t1.style.opacity = '1'; }, 500);
+            // Hide 1st text
+            setTimeout(() => { t1.style.opacity = '0'; }, 2500);
+
+            // Scene 2: Show 2nd text
+            setTimeout(() => { t2.style.opacity = '1'; }, 3500);
+            // Hide 2nd text
+            setTimeout(() => { t2.style.opacity = '0'; }, 5500);
+
+            // Scene 3: Show 3rd text
+            setTimeout(() => { t3.style.opacity = '1'; }, 6500);
+            // Hide 3rd text
+            setTimeout(() => { t3.style.opacity = '0'; }, 8500);
+
+            // Final: Fade out overlay and show main content
             setTimeout(() => {
-                const overlay = document.getElementById('intro-overlay');
-                const content = document.getElementById('main-container');
-                
                 overlay.style.opacity = '0';
                 content.classList.add('show-content');
-                
-                // Remove overlay from DOM after fade out
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 1000);
-            }, 2500); // 2.5 seconds delay
+                setTimeout(() => { overlay.style.display = 'none'; }, 1000);
+            }, 9500);
         });
 
         // --- Your Reasons Logic ---
@@ -125,7 +124,6 @@
         ];
 
         let currentIndex = 0;
-
         const btn = document.getElementById('generate-btn');
         const display = document.getElementById('reason-display');
 
@@ -152,6 +150,7 @@
     </script>
 </body>
 </html>
+
 
 
 
